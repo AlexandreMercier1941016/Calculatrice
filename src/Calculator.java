@@ -20,7 +20,7 @@ public class Calculator {
             }
 
             double result = calculate(expression);
-            System.out.println("Résultat: " + String.valueOf(result));
+            System.out.println("Résultat: " + result);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -42,18 +42,46 @@ public class Calculator {
                 else{
                     numbers.add(number);
                     number = "";
-                    operators.add(Character.toString(character));
+                    operators.add(String.valueOf(character));
                 }
             }
             else{
                 throw new Exception("Il y a un caractère invalide.");
             }
         }
-        if(!numbers.isEmpty()) {
-            numbers.add(number);
+        numbers.add(number);
+
+        List<String> newNumbers = new ArrayList<>();
+        List<String> newOperators = new ArrayList<>();
+        String firstNumber = numbers.get(0);
+
+        for(int i=0;i<operators.size();i++) {
+            String secondNumber = numbers.get(i+1);
+            if(operators.get(i).equals("*")) {
+                firstNumber = String.valueOf(Multiplication.multiply(firstNumber,secondNumber));
+            }
+            else if(operators.get(i).equals("/")) {
+                firstNumber = String.valueOf(Division.divide(firstNumber,secondNumber));
+            }
+            else{
+                newNumbers.add(firstNumber);
+                newOperators.add(operators.get(i));
+                firstNumber = secondNumber;
+            }
         }
-        System.out.println(numbers);
-        System.out.println(operators);
-        return 0;
+        newNumbers.add(firstNumber);
+
+        firstNumber = newNumbers.get(0);
+        for(int i=0;i<newOperators.size();i++) {
+            String secondNumber = newNumbers.get(i+1);
+            if(newOperators.get(i).equals("+")) {
+                firstNumber = String.valueOf(Addition.add(firstNumber,secondNumber));
+            }
+            else if(newOperators.get(i).equals("-")) {
+                firstNumber = String.valueOf(Substaction.substract(firstNumber,secondNumber));
+            }
+        }
+
+        return Double.parseDouble(firstNumber);
     }
 }
