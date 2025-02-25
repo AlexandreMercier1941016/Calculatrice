@@ -53,7 +53,7 @@ public class Calculator {
 
             List<String> newNumbers1 = new ArrayList<>();
             List<String> newOperators1 = new ArrayList<>();
-            String firstNumber = numbers.getFirst();
+            String firstNumber = numbers.get(0);
 
             for(int i=0;i<operators.size();i++) {
                 String secondNumber = numbers.get(i+1);
@@ -70,7 +70,7 @@ public class Calculator {
 
             List<String> newNumbers2 = new ArrayList<>();
             List<String> newOperators2 = new ArrayList<>();
-            firstNumber = newNumbers1.getFirst();
+            firstNumber = newNumbers1.get(0);
 
             for(int i=0;i<newOperators1.size();i++) {
                 String secondNumber = newNumbers1.get(i+1);
@@ -93,7 +93,7 @@ public class Calculator {
             }
             newNumbers2.add(firstNumber);
 
-            firstNumber = newNumbers2.getFirst();
+            firstNumber = newNumbers2.get(0);
             for(int i=0;i<newOperators2.size();i++) {
                 String secondNumber = newNumbers2.get(i+1);
                 if(newOperators2.get(i).equals("+")) {
