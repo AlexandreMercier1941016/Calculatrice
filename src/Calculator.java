@@ -15,7 +15,7 @@ public class Calculator {
             if(expression.contains(",")) {
                 throw new Exception("Il faut utiliser un point(.) et non une virgule(,) pour les nombres décimaux.");
             }
-
+            expression = expression.replaceAll("sqrt\\((.*?)\\)", "$1^0.5");
             Double result = calculate(expression);
             if(result != null) {
                 System.out.println("Résultat: " + result);
